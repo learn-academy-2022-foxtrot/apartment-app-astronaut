@@ -26,7 +26,6 @@ const App = (props) => {
       })
       .catch((error) => console.log(error))
   }
-
   return (
     <BrowserRouter>
       <Header {...props} />
@@ -42,5 +41,6 @@ const App = (props) => {
     </BrowserRouter>
   )
 }
+
 
 export default App
