@@ -12,7 +12,7 @@ class ApartmentsController < ApplicationController
   #     render json: apartment.errors, status: 422
   #   end
   # end
-  
+
   # def destroy
   #   apartment = Apartment.find(params[:id])
   #   if apartment.destroy
