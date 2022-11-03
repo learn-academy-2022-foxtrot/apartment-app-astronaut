@@ -34,7 +34,7 @@ jobs:
         run: bin/rails db:migrate
       # Add or replace test runners here
       - name: Run rspec tests
-        run: rspec spec
+        run: bundle exec rspec spec
   jest-test:
     runs-on: ubuntu-latest
     steps:
