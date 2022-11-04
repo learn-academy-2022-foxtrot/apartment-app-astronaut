@@ -148,7 +148,7 @@ RSpec.describe Apartment, type: :model do
   end
 
   it "should have a valid image" do
-    apartment = user.apartments.new(
+    apartment = Apartment.new(
       street: "221B Sandy Street",
       city: "Bikini Bottom",
       state: "Pacific Ocean",
@@ -157,10 +157,11 @@ RSpec.describe Apartment, type: :model do
       price: "1000 sand dollars",
       bedrooms: 2,
       bathrooms: 2,
-      pets: "yes"
+      pets: "yes",
+      user_id: user.id
     )
     apartment.validate
-    expect(apartment.errors[:image]).to include "can't be blank"
+    expect(apartment.errors[:image]).to_not be_empty
   end
 
   it "should have a valid user" do
@@ -180,6 +181,4 @@ RSpec.describe Apartment, type: :model do
     p "apartment.errors", apartment.errors[:user]
     expect(apartment.errors[:user]).to include "must exist"
   end
-
-  
 end
