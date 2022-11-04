@@ -157,10 +157,7 @@ rails s
 See what is available already in the application.
 
 - What can a USER do?
-<<<<<<< HEAD
-=======
 devise, all the pages in url, 
->>>>>>> github-actions-eslint
 - What views (pages, components) are available?
 
 ## 🚗 Testing
@@ -171,11 +168,7 @@ To run the existing testing suite, run:
 yarn test
 rspec spec
 ```
-<<<<<<< HEAD
 
-## 🧹 Linting
-
-=======
 ----------------------Failing rspec
 ```bash
   1) Apartment should have a valid street
@@ -198,11 +191,8 @@ rspec spec
 
   # request tests the controllers code, but also the full stack of a HTTP request, including, routing, views even the rack.
 ```
+
 ## 🧹 Linting
-```bash
-Sometimes the linting does not work after making changes. To fix this in Visual Studio Code run the command Shift+CMD+P to Show the Command Palette and then search for ESLint: Restart ESLint Server. This should get the linting working properly in all files.
-```
->>>>>>> github-actions-eslint
 To run the linter and find errors in React, run:
 
 ```bash
@@ -215,8 +205,33 @@ To run the linter and find errors in Rails, run:
 standardrb
 ```
 
-<<<<<<< HEAD
-=======
+### Apartment Data Specs
+
+Part of your responsibility will be to build out robust tests both for models and for requests.
+Tests you will need are:
+
+REQUEST:
+
+- to ensure a user can see all apartments
+- to ensure a user can see all apartments that belong to them
+- to ensure a user can make a new apartment
+- to ensure a user can update an apartment
+- to ensure a user can remove an apartment
+- to ensure a user cannot make a new apartment with nil values
+- to ensure an error will be thrown if an unregistered user tried to make an apartment
+- to ensure an error will be thrown if a user tries to edit an apartment that doesn't belong to them
+- to ensure an error will be thrown if a user tries to delete an apartment that doesn't belong to them
+
+MODELS:
+
+- to ensure apartment is valid
+- to ensure a user cannot make a new apartment with nil values
+- to ensure a user cannot make a new apartment that already exists in the database
+- to ensure a user cannot update an apartment with nil values
+- to ensure a user cannot update another user's apartment
+
+
+## Examples for controller methods, spec folder testing
 ```ruby
 # controllers
   def index
@@ -246,6 +261,7 @@ standardrb
   def apartment_params
     params.require(:apartment).permit(:street, :city, :state, :manager, :email, :price, :bedrooms, :bathrooms, :pets, :user_id)
   end
+
 
   # spec/models
     let(:user) { User.create email: 'sarah@test.com', password: '123456', password_confirmation: '123456' }
@@ -290,6 +306,7 @@ standardrb
     apartment = Apartment.create street: '221B Baker Street', city: 'London', state: 'England', manager: 'Ms. Hudson', email: 'mzhud@email.com',price: '1000', bedrooms: 2, bathrooms: 2, pets: 'no'
     expect(apartment.errors[:user]).to include "must exist"
   end
+
 
   # spec/request
     let(:user) do
@@ -522,33 +539,9 @@ standardrb
       end
     end
 
+
     # app/models
     belongs_to :user
-    validates :street, :city, :state, :manager, :email, :price, :bedrooms, :bathrooms, :pets, :user_id, presence: true
+    validates :street, :city, :state, :manager, :email, :price, :bedrooms, :bathrooms, :pets, :image, :user_id, presence: true
 
 ```
->>>>>>> github-actions-eslint
-### Apartment Data Specs
-
-Part of your responsibility will be to build out robust tests both for models and for requests.
-Tests you will need are:
-
-REQUEST:
-
-- to ensure a user can see all apartments
-- to ensure a user can see all apartments that belong to them
-- to ensure a user can make a new apartment
-- to ensure a user can update an apartment
-- to ensure a user can remove an apartment
-- to ensure a user cannot make a new apartment with nil values
-- to ensure an error will be thrown if an unregistered user tried to make an apartment
-- to ensure an error will be thrown if a user tries to edit an apartment that doesn't belong to them
-- to ensure an error will be thrown if a user tries to delete an apartment that doesn't belong to them
-
-MODELS:
-
-- to ensure apartment is valid
-- to ensure a user cannot make a new apartment with nil values
-- to ensure a user cannot make a new apartment that already exists in the database
-- to ensure a user cannot update an apartment with nil values
-- to ensure a user cannot update another user's apartment
