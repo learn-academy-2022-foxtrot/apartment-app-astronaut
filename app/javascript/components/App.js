@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom"
 
 import Footer from "./components/Footer"
 import Header from "./components/Header"
@@ -9,6 +9,7 @@ import ApartmentIndex from "./pages/ApartmentIndex"
 import ApartmentNew from "./pages/ApartmentNew"
 import ApartmentShow from "./pages/ApartmentShow"
 import Home from "./pages/Home"
+import MyApartment from "./pages/MyApartment"
 import NotFound from "./pages/NotFound"
 
 import mockApartments from "./mockApartments"
@@ -35,6 +36,7 @@ const App = (props) => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
+        <Route path="/myapartment" element={<MyApartment apartments={apartments}/>} />
         <Route path="/apartmentshow" element={<ApartmentShow />} />
         <Route path="/apartmentnew" element={<ApartmentNew />} />
         <Route path="/apartmentedit" element={<ApartmentEdit />} />
