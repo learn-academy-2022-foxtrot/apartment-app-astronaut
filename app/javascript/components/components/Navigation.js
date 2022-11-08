@@ -21,34 +21,40 @@ const Navigation = ({
             View Listings
           </NavLink>
         </NavItem>
-        {logged_in && (
-          <NavItem>
-            <a href={sign_out_route} className="nav-link">
-              Sign Out
-            </a>
-          </NavItem>
-        )}
-        {logged_in && (
-          <NavItem>
-            <NavLink to="/myapartment" className="nav-link">
-              My Listings
-            </NavLink>
-          </NavItem>
-        )}
-        {!logged_in && (
-          <NavItem>
-            <a href={sign_in_route} className="nav-link">
-              Sign In
-            </a>
-          </NavItem>
-        )}
-        {!logged_in && (
-          <NavItem>
-            <a href={new_user_route} className="nav-link">
-              Sign Up
-            </a>
-          </NavItem>
-        )}
+        {logged_in
+          ? (
+          <>
+            <NavItem>
+              <a href={sign_out_route} className="nav-link">
+                Sign Out
+              </a>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/myapartment" className="nav-link">
+                My Listings
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/apartmentnew" className="nav-link">
+                Create a Listing
+              </NavLink>
+            </NavItem>
+          </>
+            )
+          : (
+            <>
+              <NavItem>
+                <a href={sign_in_route} className="nav-link">
+                  Sign In
+                </a>
+              </NavItem>
+              <NavItem>
+                <a href={new_user_route} className="nav-link">
+                  Sign Up
+                </a>
+              </NavItem>
+            </>
+            )}
       </Nav>
     </>
   )

@@ -23,4 +23,14 @@ describe("<Navigation />", () => {
     userEvent.click(screen.getByText("Home"))
     expect(screen.getByText("Home")).toBeInTheDocument()
   })
+  it("has nav links", () => {
+    render(
+      <BrowserRouter>
+        <Navigation />
+      </BrowserRouter>
+    )
+    // screen.logTestingPlaygroundURL()
+    const navRole = screen.getByRole("link", { name: /home/i })
+    expect(screen.getByText("View Listings")).toBeInTheDocument()
+  })
 })
