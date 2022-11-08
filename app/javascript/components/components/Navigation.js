@@ -33,6 +33,11 @@ const Navigation = ({
                 My Listings
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink to="/apartmentnew" className="nav-link">
+                Create a Listing
+              </NavLink>
+            </NavItem>
           </>
           ) : (
             <>
