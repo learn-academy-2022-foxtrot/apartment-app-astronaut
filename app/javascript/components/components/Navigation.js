@@ -21,7 +21,8 @@ const Navigation = ({
             View Listings
           </NavLink>
         </NavItem>
-        {logged_in ? (
+        {logged_in
+          ? (
           <>
             <NavItem>
               <a href={sign_out_route} className="nav-link">
@@ -39,20 +40,21 @@ const Navigation = ({
               </NavLink>
             </NavItem>
           </>
-          ) : (
+            )
+          : (
             <>
               <NavItem>
                 <a href={sign_in_route} className="nav-link">
                   Sign In
                 </a>
-              </NavItem> 
+              </NavItem>
               <NavItem>
                 <a href={new_user_route} className="nav-link">
                   Sign Up
                 </a>
               </NavItem>
             </>
-        )}
+            )}
       </Nav>
     </>
   )

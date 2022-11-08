@@ -30,9 +30,7 @@ describe("<Navigation />", () => {
       </BrowserRouter>
     )
     // screen.logTestingPlaygroundURL()
-    const navRole = screen.getByRole('link', { name: /home/i })
+    const navRole = screen.getByRole("link", { name: /home/i })
     expect(screen.getByText("View Listings")).toBeInTheDocument()
-
   })
-  
 })
