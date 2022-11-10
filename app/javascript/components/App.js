@@ -32,6 +32,19 @@ const App = (props) => {
 
   const createApartment = (apartment) => {
     console.log(apartment)
+    // fetch("/apartments", {
+    //   // converts the object to a string that can be passed in the request
+    //   body: JSON.stringify(apartment),
+    //   // specify the info being sent in JSON and the info returning should be JSON
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   // HTTP verb so the correct endpoint is invoked on the server
+    //   method: "POST"
+    // })
+    //   .then((response) => response.json())
+    //   .then((payload) => readApartments())
+    //   .catch((errors) => console.log("Apartment errors:", errors))
   }
 
   return (

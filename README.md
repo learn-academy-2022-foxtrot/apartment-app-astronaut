@@ -205,6 +205,8 @@ To run the linter and find errors in Rails, run:
 standardrb
 ```
 
+To fix errors tag `--fix` to the end of each command
+
 ### Apartment Data Specs
 
 Part of your responsibility will be to build out robust tests both for models and for requests.
@@ -546,9 +548,80 @@ MODELS:
 
 ```
 
+### Protected Index
+```javascript
+// Make current user available to MyApartment on App.js
+import MyApartment from "./pages/MyApartment"
 
-    "moduleNameMapper": {
-      "#(.*)": "<rootDir>/node_modules/$1", 
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/javascript/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/test/javascript/__mocks__/styleMock.js"
-    },
+const App = (props) => {
+
+<Route path="/myapartment" element={<MyApartment {...props} apartments={apartments}/>} />
+
+// Accept the props on MyApartment
+const MyApartment = ( {current_user, apartments} ) => {
+  console.log(current_user)
+  console.log(apartments)
+
+// Ensure that only the apartments created by the current user are displayed
+  const myApartments = apartments?.filter(apartment => apartment.user_id === current_user.id) 
+
+// Testing the page requires hard coding a current user and apartments assigned to current user id
+  beforeEach(() => {
+
+    const current_user = {
+      email: "test@example.com",
+      password: "password", 
+      id: 1
+    }
+    console.log(current_user)
+    const apartments = [
+      {
+        street: "423 Privet Drive",
+        city: "Little Whinging",
+        state: "Surrey",
+        manager: "Mr. Potter",
+        email: "potter@example.com",
+        price: 2000,
+        bedrooms: 3,
+        bathrooms: 2,
+        pets: "yes",
+        image: "https://c8.alamy.com/comp/B0RJGE/small-bungalow-home-with-pathway-in-addlestone-surrey-uk-B0RJGE.jpg",
+        user_id: 1
+      },
+      {
+        street: "15 Yemen Road",
+        city: "Yemen",
+        state: "Yemen",
+        manager: "Mr. Bing",
+        email: "bing@example.com",
+        price: 1000,
+        bedrooms: 3,
+        bathrooms: 2,
+        pets: "yes",
+        image: "https://i.pinimg.com/736x/4f/c1/ce/4fc1ce196ea1412f670d477a026ba2c6--saudi-arabia-drawing-reference.jpg",
+        user_id: 1
+      },
+      {
+        street: "742 Evengreen Terrace",
+        city: "Springfield",
+        state: "Any State",
+        manager: "Mr. Simpson",
+        email: "simpson@example.com",
+        price: 1000,
+        bedrooms: 3,
+        bathrooms: 2,
+        pets: "yes",
+        image: "https://upload.wikimedia.org/wikipedia/en/c/ca/742_Evergreen_Terrace.png",
+        user_id: 2
+      }
+    ]
+
+    const myApartments = apartments.filter(apartment => apartment.user_id === current_user.id)
+
+    render(
+      <BrowserRouter>
+        <MyApartment current_user={current_user} apartments={myApartments}/>
+      </BrowserRouter>
+    )
+  }) 
+```
