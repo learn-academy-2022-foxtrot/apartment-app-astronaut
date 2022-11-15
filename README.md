@@ -625,3 +625,33 @@ const MyApartment = ( {current_user, apartments} ) => {
     )
   }) 
 ```
+
+### Troubleshooting
+Error Code:
+![moduleNameMapper](./app/assets/images/moduleNameMapper.png)
+Solution:
+Allow the test suite to mock a default response anytime react testing library sees an image import.
+create mock data to represent the image file that will be imported for the test. `app/javascript/__mocks__/fileMock.js` 
+
+ Add the following code snippet to fileMock.js:
+```javascript 
+let mockPic = "this is mock pic"
+export default mockPic
+```
+Ensure the file path to the mock file is correct on the moduleNameMapper in the jest configuration on package.json. `rootDir` will automatically populate with the path that leads to your application. However, you will need to ensure the correct folder and files are appended after <rootDir>
+  `  "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/app/javascript/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/app/javascript/__mocks__/styleMock.js"
+    } ` 
+
+It is not necessary to import the mock data on the test file because moduleNameMapper will automatically response when the test suite looks for an image import.
+https://stackoverflow.com/questions/46898638/importing-images-breaks-jest-test 
+https://jestjs.io/docs/webpack
+
+
+Ways to test html elements on react pages:
+- screen.debug() Shows the document currently being rendered
+![screenDebug](./app/assets/images/screenDebug.png)
+
+- screen.logTestingPlaygroundURL() It creates a sandbox area of the component that is being rendered on your test. When you hover over the different elements, a query is given to you of how to test that section. 
+[![YouTube](https://i9.ytimg.com/vi/VPtUXCWV_g0/mq2.jpg?sqp=CMjBzZsG-oaymwEmCMACELQB8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGDsgEyh_MA8=&rs=AOn4CLBwlHXqbu0w5AA_Rk6ch97CjHAYUA)](https://youtu.be/VPtUXCWV_g0)
