@@ -205,6 +205,8 @@ To run the linter and find errors in Rails, run:
 standardrb
 ```
 
+To fix errors tag `--fix` to the end of each command
+
 ### Apartment Data Specs
 
 Part of your responsibility will be to build out robust tests both for models and for requests.
@@ -546,9 +548,149 @@ MODELS:
 
 ```
 
+### Protected Index
+```javascript
+// Make current user available to MyApartment on App.js
+import MyApartment from "./pages/MyApartment"
 
-    "moduleNameMapper": {
-      "#(.*)": "<rootDir>/node_modules/$1", 
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/javascript/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/test/javascript/__mocks__/styleMock.js"
-    },
+const App = (props) => {
+
+<Route path="/myapartment" element={<MyApartment {...props} apartments={apartments}/>} />
+
+// Accept the props on MyApartment
+const MyApartment = ( {current_user, apartments} ) => {
+  console.log(current_user)
+  console.log(apartments)
+
+// Ensure that only the apartments created by the current user are displayed
+  const myApartments = apartments?.filter(apartment => apartment.user_id === current_user.id) 
+
+// Testing the page requires hard coding a current user and apartments assigned to current user id
+  beforeEach(() => {
+
+    const current_user = {
+      email: "test@example.com",
+      password: "password", 
+      id: 1
+    }
+    console.log(current_user)
+    const apartments = [
+      {
+        street: "423 Privet Drive",
+        city: "Little Whinging",
+        state: "Surrey",
+        manager: "Mr. Potter",
+        email: "potter@example.com",
+        price: 2000,
+        bedrooms: 3,
+        bathrooms: 2,
+        pets: "yes",
+        image: "https://c8.alamy.com/comp/B0RJGE/small-bungalow-home-with-pathway-in-addlestone-surrey-uk-B0RJGE.jpg",
+        user_id: 1
+      },
+      {
+        street: "15 Yemen Road",
+        city: "Yemen",
+        state: "Yemen",
+        manager: "Mr. Bing",
+        email: "bing@example.com",
+        price: 1000,
+        bedrooms: 3,
+        bathrooms: 2,
+        pets: "yes",
+        image: "https://i.pinimg.com/736x/4f/c1/ce/4fc1ce196ea1412f670d477a026ba2c6--saudi-arabia-drawing-reference.jpg",
+        user_id: 1
+      },
+      {
+        street: "742 Evengreen Terrace",
+        city: "Springfield",
+        state: "Any State",
+        manager: "Mr. Simpson",
+        email: "simpson@example.com",
+        price: 1000,
+        bedrooms: 3,
+        bathrooms: 2,
+        pets: "yes",
+        image: "https://upload.wikimedia.org/wikipedia/en/c/ca/742_Evergreen_Terrace.png",
+        user_id: 2
+      }
+    ]
+
+    const myApartments = apartments.filter(apartment => apartment.user_id === current_user.id)
+
+    render(
+      <BrowserRouter>
+        <MyApartment current_user={current_user} apartments={myApartments}/>
+      </BrowserRouter>
+    )
+  }) 
+```
+
+### Troubleshooting
+Error Code:
+![moduleNameMapper](./app/assets/images/moduleNameMapper.png)
+Solution:
+Allow the test suite to mock a default response anytime react testing library sees an image import.
+create mock data to represent the image file that will be imported for the test. `app/javascript/__mocks__/fileMock.js` 
+
+ Add the following code snippet to fileMock.js:
+```javascript 
+let mockPic = "this is mock pic"
+export default mockPic
+```
+Ensure the file path to the mock file is correct on the moduleNameMapper in the jest configuration on package.json. `rootDir` will automatically populate with the path that leads to your application. However, you will need to ensure the correct folder and files are appended after <rootDir>
+  `  "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/app/javascript/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/app/javascript/__mocks__/styleMock.js"
+    } ` 
+
+It is not necessary to import the mock data on the test file because moduleNameMapper will automatically response when the test suite looks for an image import.
+https://stackoverflow.com/questions/46898638/importing-images-breaks-jest-test 
+https://jestjs.io/docs/webpack
+
+    render(
+      <BrowserRouter>
+        <Navigation logged_in={true} sign_out_route="/users/sign_out"/>
+      </BrowserRouter>
+    )
+
+    // sign out
+    const outLink = screen.queryByText(/sign out/i)
+    screen.debug(outLink)
+    expect(outLink.getAttribute('href')).toBe("/users/sign_out");
+
+Ways to test html elements on react pages:
+- screen.debug() Shows the document currently being rendered
+![screenDebug](./app/assets/images/screenDebug.png)
+
+- screen.logTestingPlaygroundURL() It creates a sandbox area of the component that is being rendered on your test. When you hover over the different elements, a query is given to you of how to test that section. 
+[![YouTube](https://i9.ytimg.com/vi/VPtUXCWV_g0/mq2.jpg?sqp=CMjBzZsG-oaymwEmCMACELQB8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGDsgEyh_MA8=&rs=AOn4CLBwlHXqbu0w5AA_Rk6ch97CjHAYUA)](https://youtu.be/VPtUXCWV_g0)
+- testing in put values on a html form
+https://www.cluemediator.com/test-an-input-field-using-the-react-testing-library 
+https://noriste.github.io/reactjsday-2019-testing-course/book/react-testing-library/custom-input.html
+
+### Create functionality issues
+- Ensure mock data has primary and foreign keys hard coded.
+```javascript
+  {
+    id: 1,
+    street: "4 Privet Drive",
+    city: "Little Whinging",
+    state: "Surrey",
+    manager: "Mr. Potter",
+    email: "potter@example.com",
+    price: 2000,
+    bedrooms: 3,
+    bathrooms: 2,
+    pets: "yes",
+    image:
+      "https://c8.alamy.com/comp/B0RJGE/small-bungalow-home-with-pathway-in-addlestone-surrey-uk-B0RJGE.jpg",
+    user_id: 1 
+  }
+```
+
+## Scary warning
+- Don't fret just a security measure for fake web sites
+```bash
+apartment/fake.org:1          GET https://apartment/fake.org net::ERR_NAME_NOT_RESOLVED
+```

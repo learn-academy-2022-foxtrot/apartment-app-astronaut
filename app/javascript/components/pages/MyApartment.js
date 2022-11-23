@@ -1,18 +1,19 @@
 import React from "react"
 import { Card, CardBody, CardTitle, CardSubtitle, Button } from "reactstrap"
 
-const MyApartment = ({ apartments }) => {
+const MyApartment = ({ current_user, apartments }) => {
+  console.log(current_user)
+  console.log(apartments)
+  const myApartments = apartments?.filter(apartment => apartment.user_id === current_user.id)
   return (
     <>
       <h3>My Apartment</h3>
       {
-        apartments?.map((apartment, index) => {
+        myApartments?.map((apartment, index) => {
           return (
             <Card
-              style={{
-                width: "14rem"
-              }}
               key={index}
+              style={{ width: "14rem" }}
             >
               <img alt={`image of apartment in ${apartment.state}`} src={apartment.image} />
               <CardBody>

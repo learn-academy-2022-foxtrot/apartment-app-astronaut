@@ -30,15 +30,32 @@ const App = (props) => {
       .catch((error) => console.log(error))
   }
 
+  const createApartment = (apartment) => {
+    // console.log(apartment)
+    fetch("/apartments", {
+      // converts the object to a string that can be passed in the request
+      body: JSON.stringify(apartment),
+      // specify the info being sent in JSON and the info returning should be JSON
+      headers: {
+        "Content-Type": "application/json"
+      },
+      // HTTP verb so the correct endpoint is invoked on the server
+      method: "POST"
+    })
+      .then((response) => response.json())
+      .then((payload) => readApartments())
+      .catch((errors) => console.log("Apartment errors:", errors))
+  }
+
   return (
     <BrowserRouter>
       <Header {...props} />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
-        <Route path="/myapartment" element={<MyApartment apartments={apartments}/>} />
+        <Route path="/myapartment" element={<MyApartment {...props} apartments={apartments}/>} />
         <Route path="/apartmentshow" element={<ApartmentShow />} />
-        <Route path="/apartmentnew" element={<ApartmentNew />} />
+        <Route path="/apartmentnew" element={<ApartmentNew {...props} createApartment={createApartment}/>} />
         <Route path="/apartmentedit" element={<ApartmentEdit />} />
         <Route element={<NotFound />} />
       </Routes>

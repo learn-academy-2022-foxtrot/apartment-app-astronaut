@@ -8,6 +8,8 @@ const Navigation = ({
   sign_in_route,
   sign_out_route
 }) => {
+  console.log(sign_out_route)
+  console.log(logged_in)
   return (
     <>
       <Nav>

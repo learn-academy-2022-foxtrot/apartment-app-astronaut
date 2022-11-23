@@ -7,4 +7,5 @@ describe("<ApartmentShow />", () => {
     const div = document.createElement("div")
     render(<ApartmentShow />, div)
   })
+  // console.log( window.location.href)
 })
