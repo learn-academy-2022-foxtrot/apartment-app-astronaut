@@ -648,6 +648,16 @@ It is not necessary to import the mock data on the test file because moduleNameM
 https://stackoverflow.com/questions/46898638/importing-images-breaks-jest-test 
 https://jestjs.io/docs/webpack
 
+    render(
+      <BrowserRouter>
+        <Navigation logged_in={true} sign_out_route="/users/sign_out"/>
+      </BrowserRouter>
+    )
+
+    // sign out
+    const outLink = screen.queryByText(/sign out/i)
+    screen.debug(outLink)
+    expect(outLink.getAttribute('href')).toBe("/users/sign_out");
 
 Ways to test html elements on react pages:
 - screen.debug() Shows the document currently being rendered
@@ -655,3 +665,32 @@ Ways to test html elements on react pages:
 
 - screen.logTestingPlaygroundURL() It creates a sandbox area of the component that is being rendered on your test. When you hover over the different elements, a query is given to you of how to test that section. 
 [![YouTube](https://i9.ytimg.com/vi/VPtUXCWV_g0/mq2.jpg?sqp=CMjBzZsG-oaymwEmCMACELQB8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGDsgEyh_MA8=&rs=AOn4CLBwlHXqbu0w5AA_Rk6ch97CjHAYUA)](https://youtu.be/VPtUXCWV_g0)
+- testing in put values on a html form
+https://www.cluemediator.com/test-an-input-field-using-the-react-testing-library 
+https://noriste.github.io/reactjsday-2019-testing-course/book/react-testing-library/custom-input.html
+
+### Create functionality issues
+- Ensure mock data has primary and foreign keys hard coded.
+```javascript
+  {
+    id: 1,
+    street: "4 Privet Drive",
+    city: "Little Whinging",
+    state: "Surrey",
+    manager: "Mr. Potter",
+    email: "potter@example.com",
+    price: 2000,
+    bedrooms: 3,
+    bathrooms: 2,
+    pets: "yes",
+    image:
+      "https://c8.alamy.com/comp/B0RJGE/small-bungalow-home-with-pathway-in-addlestone-surrey-uk-B0RJGE.jpg",
+    user_id: 1 
+  }
+```
+
+## Scary warning
+- Don't fret just a security measure for fake web sites
+```bash
+apartment/fake.org:1          GET https://apartment/fake.org net::ERR_NAME_NOT_RESOLVED
+```

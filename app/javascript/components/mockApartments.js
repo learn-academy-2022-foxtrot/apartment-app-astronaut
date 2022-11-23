@@ -1,5 +1,6 @@
 const apartments = [
   {
+    id: 1,
     street: "4 Privet Drive",
     city: "Little Whinging",
     state: "Surrey",
@@ -10,9 +11,11 @@ const apartments = [
     bathrooms: 2,
     pets: "yes",
     image:
-      "https://c8.alamy.com/comp/B0RJGE/small-bungalow-home-with-pathway-in-addlestone-surrey-uk-B0RJGE.jpg"
+      "https://c8.alamy.com/comp/B0RJGE/small-bungalow-home-with-pathway-in-addlestone-surrey-uk-B0RJGE.jpg",
+    user_id: 1 
   },
   {
+    id: 2,
     street: "15 Yemen Road",
     city: "Yemen",
     state: "Yemen",
@@ -23,9 +26,11 @@ const apartments = [
     bathrooms: 2,
     pets: "yes",
     image:
-      "https://i.pinimg.com/736x/4f/c1/ce/4fc1ce196ea1412f670d477a026ba2c6--saudi-arabia-drawing-reference.jpg"
+      "https://i.pinimg.com/736x/4f/c1/ce/4fc1ce196ea1412f670d477a026ba2c6--saudi-arabia-drawing-reference.jpg",
+    user_id: 1 
   },
   {
+    id:3,
     street: "742 Evengreen Terrace",
     city: "Springfield",
     state: "Any State",
@@ -36,7 +41,8 @@ const apartments = [
     bathrooms: 2,
     pets: "yes",
     image:
-      "https://upload.wikimedia.org/wikipedia/en/c/ca/742_Evergreen_Terrace.png"
+      "https://upload.wikimedia.org/wikipedia/en/c/ca/742_Evergreen_Terrace.png",
+    user_id: 2
   }
 ]
 

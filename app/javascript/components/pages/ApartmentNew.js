@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Form, FormGroup, Label, Input, Button } from "reactstrap"
 import { useNavigate } from "react-router-dom"
 
-const ApartmentNew = ({ createApartment }) => {
+const ApartmentNew = ({ createApartment, current_user }) => {
   const navigate = useNavigate()
   const [newApartment, setNewApartment] = useState({
     street: "",
@@ -14,14 +14,15 @@ const ApartmentNew = ({ createApartment }) => {
     bedrooms: "",
     bathrooms: "",
     pets: "",
-    image: ""
+    image: "",
+    user_id: current_user.id
   })
   const handleChange = (e) => {
     setNewApartment({ ...newApartment, [e.target.name]: e.target.value })
   }
   const handleSubmit = () => {
     createApartment(newApartment)
-    navigate("/apartmentindex")
+    navigate("/myapartment")
   }
 
   return (
@@ -33,6 +34,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="text"
             name="street"
+            placeholder="Enter Street"
             onChange={handleChange}
             value={newApartment.street} />
         </FormGroup>
@@ -41,6 +43,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="text"
             name="city"
+            placeholder="Enter City"
             onChange={handleChange}
             value={newApartment.city} />
         </FormGroup>
@@ -49,6 +52,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="text"
             name="state"
+            placeholder="Enter State"
             onChange={handleChange}
             value={newApartment.state} />
         </FormGroup>
@@ -57,6 +61,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="text"
             name="manager"
+            placeholder="Enter Manager"
             onChange={handleChange}
             value={newApartment.manager} />
         </FormGroup>
@@ -65,6 +70,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="text"
             name="email"
+            placeholder="Enter Manager's Email"
             onChange={handleChange}
             value={newApartment.email} />
         </FormGroup>
@@ -73,6 +79,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="number"
             name="price"
+            placeholder="Enter Monthly Cost"
             onChange={handleChange}
             value={newApartment.price} />
         </FormGroup>
@@ -81,6 +88,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="number"
             name="bedrooms"
+            placeholder="Enter Amount of Bedrooms"
             onChange={handleChange}
             value={newApartment.bedrooms} />
         </FormGroup>
@@ -89,6 +97,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="number"
             name="bathrooms"
+            placeholder="Enter Amount of Bathrooms"
             onChange={handleChange}
             value={newApartment.bathrooms} />
         </FormGroup>
@@ -97,6 +106,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="text"
             name="pets"
+            placeholder="Pets Allowed? Yes or No"
             onChange={handleChange}
             value={newApartment.pets} />
         </FormGroup>
@@ -105,6 +115,7 @@ const ApartmentNew = ({ createApartment }) => {
           <Input
             type="text"
             name="image"
+            placeholder="Enter URL for photo"
             onChange={handleChange}
             value={newApartment.image} />
         </FormGroup>

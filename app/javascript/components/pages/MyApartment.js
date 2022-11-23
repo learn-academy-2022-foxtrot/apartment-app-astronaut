@@ -2,8 +2,8 @@ import React from "react"
 import { Card, CardBody, CardTitle, CardSubtitle, Button } from "reactstrap"
 
 const MyApartment = ({ current_user, apartments }) => {
-  // console.log(current_user)
-  // console.log(apartments)
+  console.log(current_user)
+  console.log(apartments)
   const myApartments = apartments?.filter(apartment => apartment.user_id === current_user.id)
   return (
     <>
