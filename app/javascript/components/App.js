@@ -54,7 +54,7 @@ const App = (props) => {
         <Route exact path="/" element={<Home />} />
         <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
         <Route path="/myapartment" element={<MyApartment {...props} apartments={apartments}/>} />
-        <Route path="/apartmentshow" element={<ApartmentShow />} />
+        <Route path="/apartmentshow/:id" element={<ApartmentShow apartments={apartments}/>} />
         <Route path="/apartmentnew" element={<ApartmentNew {...props} createApartment={createApartment}/>} />
         <Route path="/apartmentedit" element={<ApartmentEdit />} />
         <Route element={<NotFound />} />
