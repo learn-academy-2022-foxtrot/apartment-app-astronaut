@@ -12,7 +12,7 @@ const apartments = [
     pets: "yes",
     image:
       "https://c8.alamy.com/comp/B0RJGE/small-bungalow-home-with-pathway-in-addlestone-surrey-uk-B0RJGE.jpg",
-    user_id: 1 
+    user_id: 1
   },
   {
     id: 2,
@@ -27,10 +27,10 @@ const apartments = [
     pets: "yes",
     image:
       "https://i.pinimg.com/736x/4f/c1/ce/4fc1ce196ea1412f670d477a026ba2c6--saudi-arabia-drawing-reference.jpg",
-    user_id: 1 
+    user_id: 1
   },
   {
-    id:3,
+    id: 3,
     street: "742 Evengreen Terrace",
     city: "Springfield",
     state: "Any State",

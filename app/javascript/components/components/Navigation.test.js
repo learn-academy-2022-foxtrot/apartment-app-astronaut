@@ -21,7 +21,7 @@ describe("<Navigation />", () => {
         <Navigation logged_in={true}/>
       </BrowserRouter>
     )
-    await userEvent.click(screen.getByRole('link', {
+    await userEvent.click(screen.getByRole("link", {
       name: /home/i
     }))
     expect(screen.getByText("View Listings")).toBeInTheDocument()
@@ -41,7 +41,7 @@ describe("<Navigation />", () => {
     console.log("logged out user")
     screen.debug()
 
-    await userEvent.click(screen.getByRole('link', {
+    await userEvent.click(screen.getByRole("link", {
       name: /home/i
     }))
     expect(screen.getByText("View Listings")).toBeInTheDocument()
@@ -60,25 +60,22 @@ describe("<Navigation />", () => {
 
     screen.logTestingPlaygroundURL()
     // view listings
-    const viewLink = screen.getByRole('link', {
-      name: /view list/i})
+    const viewLink = screen.getByRole("link", { name: /view list/i })
     // reference: https://javascript.plainenglish.io/testing-flow-creating-react-app-21399ff25c7c
     fireEvent.click(viewLink)
     expect(location.pathname).toBe("/apartmentindex")
 
     // create a listing
-    const createLink = screen.getByRole('link', {
-      name: /create/i})
+    const createLink = screen.getByRole("link", { name: /create/i })
     fireEvent.click(createLink)
     console.log("create a listing", location.pathname)
     expect(location.pathname).toBe("/apartmentnew")
 
     // sign out
-    const outLink = screen.getByRole('link', {
-      name: /sign out/i})
+    const outLink = screen.getByRole("link", { name: /sign out/i })
     // const outLink = screen.queryByText(/sign out/i)
     screen.debug(outLink)
     fireEvent.click(outLink)
-    expect(outLink.getAttribute('href')).toBe("/users/sign_out");
+    expect(outLink.getAttribute("href")).toBe("/users/sign_out")
   })
 })

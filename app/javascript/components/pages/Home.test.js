@@ -4,7 +4,6 @@ import Home from "./Home"
 import { BrowserRouter } from "react-router-dom"
 import userEvent from "@testing-library/user-event"
 
-
 describe("<Home />", () => {
   beforeEach(() => {
     render(
@@ -41,7 +40,7 @@ describe("<Home />", () => {
   test("has clickable links for a registered user", async () => {
     screen.debug()
     // shows path url
-    console.log(window.location.href);
+    console.log(window.location.href)
     expect(location.pathname).toBe("/")
     // await userEvent.click(screen.getByRole('link', {
     //   name: /home/i

@@ -8,5 +8,4 @@ describe("<ApartmentShow />", () => {
     render(<ApartmentShow />, div)
   })
   // console.log( window.location.href)
-
 })
