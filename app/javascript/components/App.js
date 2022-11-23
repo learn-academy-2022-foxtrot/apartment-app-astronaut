@@ -44,7 +44,23 @@ const App = (props) => {
     })
       .then((response) => response.json())
       .then((payload) => readApartments())
-      .catch((errors) => console.log("Apartment errors:", errors))
+      .catch((errors) => console.log("Apartment create errors:", errors))
+  }
+
+  const updateApt = (updatedApt, id) => {
+    fetch(`http://localhost:3000/apartments/${id}`, {
+      // converting an object to a string
+      body: JSON.stringify(updatedApt),
+      // specify the info being sent in JSON and the info returning should be JSON
+      headers: {
+        "Content-Type": "application/json"
+      },
+      // and will update our controller method
+      method: "PATCH"
+    })
+      .then(response => response.json())
+      .then(payload => readApartments())
+      .catch(errors => console.log("Apartment update errors:", errors))
   }
 
   return (
@@ -54,10 +70,10 @@ const App = (props) => {
         <Route exact path="/" element={<Home />} />
         <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
         <Route path="/myapartment" element={<MyApartment {...props} apartments={apartments}/>} />
-        <Route path="/apartmentshow/:id" element={<ApartmentShow apartments={apartments}/>} />
+        <Route path="/apartmentshow/:id" element={<ApartmentShow {...props} apartments={apartments}/>} />
         <Route path="/apartmentnew" element={<ApartmentNew {...props} createApartment={createApartment}/>} />
-        <Route path="/apartmentedit" element={<ApartmentEdit />} />
-        <Route element={<NotFound />} />
+        <Route path="/apartmentedit/:id" element={<ApartmentEdit apartments={apartments} updateApt={updateApt}/>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
