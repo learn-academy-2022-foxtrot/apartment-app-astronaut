@@ -12,7 +12,7 @@ const ApartmentShow = ({ apartments }) => {
     <>
       <h3>ApartmentShow</h3>
       <main className="apt-show-cards">
-      {currentApt && (
+        {currentApt && (
           <Card
             style={{
               width: "18rem"
@@ -48,7 +48,7 @@ const ApartmentShow = ({ apartments }) => {
               </CardText>
             </CardBody>
           </Card>
-      )}
+        )}
       </main>
     </>
   )
