@@ -14,3 +14,13 @@
  *= require_self
  */
 @import 'bootstrap';
+
+.card {
+  margin: 2rem 0;
+}
+
+.apt-index-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

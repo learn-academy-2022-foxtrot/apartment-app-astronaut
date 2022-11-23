@@ -1,7 +1,6 @@
 import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
-
 import ApartmentNew from "./ApartmentNew"
 import userEvent from "@testing-library/user-event"
 
