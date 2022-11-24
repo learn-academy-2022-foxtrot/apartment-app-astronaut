@@ -1,13 +1,17 @@
 import React from "react"
-import { useParams, NavLink } from "react-router-dom"
+import { useParams, useNavigate, NavLink } from "react-router-dom"
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from "reactstrap"
 
-const ApartmentShow = ({ apartments, current_user }) => {
+const ApartmentShow = ({ apartments, current_user, deleteApt }) => {
   const { id } = useParams()
   // console.log(id)
+  const navigate = useNavigate()
   const currentApt = apartments.find((apt) => apt.id === +id)
   // console.log(currentApt)
-
+  const handleDelete = () => {
+    deleteApt(currentApt.id)
+    navigate("/apartmentindex")
+  }
   return (
     <>
       <h3>ApartmentShow</h3>
@@ -48,11 +52,16 @@ const ApartmentShow = ({ apartments, current_user }) => {
               </CardText>
             </CardBody>
             {currentApt.user_id === current_user.id &&
-              <Button>
-                <NavLink to={`/apartmentedit/${currentApt.id}`} className="nav-link">
-                  Modify Apartment
-                </NavLink>
-              </Button>
+              <>
+                <Button>
+                  <NavLink to={`/apartmentedit/${currentApt.id}`} className="nav-link">
+                    Modify Apartment
+                  </NavLink>
+                </Button>
+                <Button onClick={handleDelete} name="submit">
+                  Delete Apartment
+                </Button>
+              </>
             }
           </Card>
         )}
