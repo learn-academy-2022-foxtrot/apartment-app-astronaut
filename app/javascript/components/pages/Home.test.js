@@ -43,7 +43,7 @@ describe("<Home />", () => {
     // console.log(window.location.href)
     expect(location.pathname).toBe("/")
 
-    const homeImage = screen.getByRole('img', {
+    const homeImage = screen.getByRole("img", {
       name: /image of apartment/i
     })
     expect(homeImage).toHaveAttribute("src", "this is mock pic")

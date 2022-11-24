@@ -6,6 +6,6 @@ describe("<Footer />", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div")
     render(<Footer />, div)
-  expect(screen.getByText(/rubber duck/i)).toBeInTheDocument()
+    expect(screen.getByText(/rubber duck/i)).toBeInTheDocument()
   })
 })

@@ -69,5 +69,4 @@ describe("<ApartmentEdit />", () => {
     expect(cityInputElement.value).toBe("Fake City")
     // screen.debug(cityInputElement)
   })
-
 })
