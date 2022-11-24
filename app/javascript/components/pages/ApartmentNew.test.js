@@ -25,7 +25,7 @@ describe("<ApartmentNew />", () => {
 
   it("renders without crashing", () => {
     // screen.debug()
-    screen.logTestingPlaygroundURL()
+    // screen.logTestingPlaygroundURL()
     expect(screen.getByRole("button", {
       name: /submit apartment/i
     })).toBeInTheDocument()
