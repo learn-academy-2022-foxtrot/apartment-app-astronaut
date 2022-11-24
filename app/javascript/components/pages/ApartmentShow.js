@@ -2,11 +2,11 @@ import React from "react"
 import { useParams, NavLink } from "react-router-dom"
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from "reactstrap"
 
-const ApartmentShow = ({ apartments }) => {
+const ApartmentShow = ({ apartments, current_user }) => {
   const { id } = useParams()
   // console.log(id)
   const currentApt = apartments.find((apt) => apt.id === +id)
-  console.log(currentApt)
+  // console.log(currentApt)
 
   return (
     <>
@@ -47,6 +47,13 @@ const ApartmentShow = ({ apartments }) => {
                 {`Contact ${currentApt.manager} at ${currentApt.email}`}
               </CardText>
             </CardBody>
+            {currentApt.user_id === current_user.id &&
+              <Button>
+                <NavLink to={`/apartmentedit/${currentApt.id}`} className="nav-link">
+                  Modify Apartment
+                </NavLink>
+              </Button>
+            }
           </Card>
         )}
       </main>
